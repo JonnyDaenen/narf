@@ -18,8 +18,8 @@ class EnvironmentView():
 
 
     def transform(self, pos):
-        return (pos[0] + self.width/2, pos[1] + self.height/2)
-
+        # return (pos[0] + self.width/2, pos[1] + self.height/2)
+        return pos
 
     def clear(self):
         # TODO it is not necessary to delete everything, we can just update it
