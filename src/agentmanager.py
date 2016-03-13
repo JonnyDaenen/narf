@@ -19,11 +19,25 @@ class AgentManager:
         for id, agent in self.agentMap.items():
             agent.update(stepDt)
 
+    def collect_actions(self):
+        actions = []
+        for id, agent in self.agentMap.items():
+            actions += agent.get_actions()
+
+        return actions
+
+    def clear_actions(self):
+        for id, agent in self.agentMap.items():
+            agent.clear_actions()
+
+    def perform_actions(self, actions):
+        for action in actions:
+            self.agentMap[action.agent_id].perform_action(action)
+
 
     def draw(self, canvas):
         for id, agent in self.agentMap.items():
             canvas.draw_agent(agent)
-
 
     def __str__(self):
         s = ""

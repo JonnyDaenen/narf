@@ -1,6 +1,7 @@
 
 import time
 from agentmanager import AgentManager
+from conflictmanager import ConflictManager
 from environmentview import EnvironmentView
 from tkinter import *
 
@@ -17,6 +18,8 @@ class SimKernel:
         self.agm.createAgent()
 
         self.stepDt = 15
+
+        self.conflict = ConflictManager()
 
     def start(self):
         print("Starting kernel...")
@@ -38,9 +41,16 @@ class SimKernel:
         self.canvas.clear()
         self.agm.draw(self.canvas)
 
-        print("Updating...")
+        print("Updating Agents...")
         self.agm.update(self.stepDt)
 
-        print("Resolving...")
+        print("Resolving Conflicts...")
+        actions = self.agm.collect_actions()
+        final_actions = self.conflict.resolve(actions)
+        self.agm.clear_actions()
+
+        print("Performing Actions...")
+        self.agm.perform_actions(final_actions)
+
 
         self.tk.after(self.stepDt, self.step)  # reschedule update function

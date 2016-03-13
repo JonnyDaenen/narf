@@ -1,5 +1,6 @@
 
 import random
+from action import Action
 
 class Agent:
 
@@ -13,8 +14,8 @@ class Agent:
         size = (vect[0]**2 + vect[1]**2)**0.5
         self.direction = [vect[0]/size, vect[1]/size]
 
-
-        # self.actions = []
+        # action indications
+        self.actions = []
 
 
     def update(self,stepDt):
@@ -26,7 +27,14 @@ class Agent:
 
         # update position
         print(stepDt, update_vect, s)
-        self.pos = list(map(sum, zip(self.pos,update_vect)))
+        newpos = list(map(sum, zip(self.pos,update_vect)))
+
+        action = Action(self.id, "pos", newpos)
+        self.add_action(action)
+
+    def perform_action(self, action):
+        if action.action_type == "pos":
+            self.pos = action.action
 
 
     def __str__(self):
@@ -34,5 +42,10 @@ class Agent:
 
 
     def add_action(self,action):
-        # self.actions.append(action)
-        pass
+        self.actions.append(action)
+
+    def get_actions(self):
+        return self.actions
+
+    def clear_actions(self):
+        self.actions = []
