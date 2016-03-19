@@ -1,5 +1,6 @@
 
 from tkinter import Canvas
+import logging
 
 class EnvironmentView():
 
@@ -50,7 +51,7 @@ class EnvironmentView():
     def draw_circle(self, id, x, y, r, v, s):
         length = r
         if id in self.cache:
-            print("cache update")
+            logging.debug("cache update")
             self.canvas.coords(self.cache[id][0],x, y, x+v[0]*length, y+v[1]*length)
             self.canvas.coords(self.cache[id][1],x-r, y-r, x+r, y+r)
         else:

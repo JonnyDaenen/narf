@@ -26,7 +26,7 @@ class Agent:
         update_vect = [f * p for p in self.direction]
 
         # update position
-        print(stepDt, update_vect, s)
+        # print(stepDt, update_vect, s)
         newpos = list(map(sum, zip(self.get_pos(),update_vect)))
 
         self.move_to(newpos)

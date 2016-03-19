@@ -1,5 +1,7 @@
 
 import time
+import logging
+
 from agentmanager import AgentManager
 from conflictmanager import ConflictManager
 from environmentview import EnvironmentView
@@ -16,6 +18,7 @@ class SimKernel:
             self.agm.createAgent()
 
         self.stepDt = 15
+        self.drawDt = 15
 
         self.conflict = ConflictManager()
         self.clock = SimClock(0)
@@ -35,24 +38,23 @@ class SimKernel:
 
 
     def step(self):
-        print("Rendering...")
-        print(self.agm)
+        logging.info("Rendering...")
         self.canvas.clear()
         self.agm.draw(self.canvas)
         self.canvas.draw_clock()
 
-        print("Spawning new Agents...")
+        logging.info("Spawning new Agents...")
         #TODO
 
-        print("Updating Agents...")
+        logging.info("Updating Agents...")
         self.agm.update(self.stepDt)
 
-        print("Resolving Conflicts...")
+        logging.info("Resolving Conflicts...")
         actions = self.agm.collect_actions()
         final_actions = self.conflict.resolve(actions)
         self.agm.clear_actions()
 
-        print("Performing Actions...")
+        logging.info("Performing Actions...")
         self.agm.perform_actions(final_actions)
 
         self.clock._addTime(self.stepDt)
