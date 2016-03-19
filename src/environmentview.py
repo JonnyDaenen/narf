@@ -4,9 +4,10 @@ from tkinter import Canvas
 class EnvironmentView():
 
 
-    def __init__(self, tk):
+    def __init__(self, tk, clock):
         self.width = 600
         self.height = 400
+        self.clock = clock
 
         # create canvas
         w = Canvas(tk, width=self.width, height=self.height)
@@ -25,6 +26,17 @@ class EnvironmentView():
         # TODO it is not necessary to delete everything, we can just update it
         # self.canvas.delete("all")
         pass
+
+    def draw_clock(self):
+        clock_id = "clock"
+        time = str(self.clock.get_time()//1000)
+        if clock_id in self.cache:
+            self.canvas.itemconfig(self.cache[clock_id], text=time)
+        else:
+            canvas_id = self.canvas.create_text(10, 10, anchor="nw")
+            self.canvas.itemconfig(canvas_id, text=time)
+            self.cache[clock_id] = (canvas_id)
+
 
     def draw_agent(self, agent):
         pos = agent.pos

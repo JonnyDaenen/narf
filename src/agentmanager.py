@@ -3,8 +3,6 @@ from agent import Agent
 
 class AgentManager:
 
-
-
     def __init__(self):
         self.agentMap = {}
         self.nextID = 0

@@ -27,10 +27,9 @@ class Agent:
 
         # update position
         print(stepDt, update_vect, s)
-        newpos = list(map(sum, zip(self.pos,update_vect)))
+        newpos = list(map(sum, zip(self.get_pos(),update_vect)))
 
-        action = Action(self.id, "pos", newpos)
-        self.add_action(action)
+        self.move_to(newpos)
 
     def perform_action(self, action):
         if action.action_type == "pos":
@@ -41,7 +40,9 @@ class Agent:
         return "Agent %s @%s v%s s%s"%(self.id, self.pos, self.direction, self.speed)
 
 
-    def add_action(self,action):
+    ## action functions
+
+    def emit_action(self,action):
         self.actions.append(action)
 
     def get_actions(self):
@@ -49,3 +50,13 @@ class Agent:
 
     def clear_actions(self):
         self.actions = []
+
+
+    ## position functions
+
+    def move_to(self,pos):
+        action = Action(self.id, "pos", pos)
+        self.emit_action(action)
+
+    def get_pos(self,):
+        return self.pos
