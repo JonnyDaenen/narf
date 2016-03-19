@@ -1,5 +1,6 @@
 
 
+from datetime import datetime
 
 class SimClock:
 
@@ -16,3 +17,8 @@ class SimClock:
 
     def lastdelta(self):
         return self.lastdelta
+
+
+    def get_currenttime(self):
+        dt = datetime.now()
+        return dt.microsecond
