@@ -1,12 +1,10 @@
-
-import time
 import logging
-
-from agentmanager import AgentManager
-from conflictmanager import ConflictManager
-from environmentview import EnvironmentView
 from tkinter import *
-from clock import SimClock
+
+from simulator.agent.agentmanager import AgentManager
+from simulator.services.conflictmanager import ConflictManager
+from simulator.environment.environmentview import EnvironmentView
+from simulator.services.clock import SimClock
 
 
 class SimKernel:

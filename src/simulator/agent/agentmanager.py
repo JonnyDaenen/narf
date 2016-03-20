@@ -1,5 +1,5 @@
 
-from agent import Agent
+from simulator.agent.agent import Agent
 
 class AgentManager:
 

@@ -1,6 +1,7 @@
-
 import random
-from action import Action
+
+from simulator.actions.action import Action
+
 
 class Agent:
 
