@@ -33,7 +33,7 @@ class Agent:
         self.move_to(newpos)
 
     def perform_action(self, action):
-        if action.action_type == "pos":
+        if action.type == "pos":
             self.pos = action.action
 
 
@@ -43,7 +43,7 @@ class Agent:
 
     ## action functions
 
-    def emit_action(self,action):
+    def emit_action(self, action):
         self.actions.append(action)
 
     def get_actions(self):
@@ -55,9 +55,9 @@ class Agent:
 
     ## position functions
 
-    def move_to(self,pos):
+    def move_to(self, pos):
         action = Action(self.id, "pos", pos)
         self.emit_action(action)
 
-    def get_pos(self,):
+    def get_pos(self):
         return self.pos
